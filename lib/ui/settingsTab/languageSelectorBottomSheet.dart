@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_application/providers/settingProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 class LanguageSelectorBottomSheet extends StatefulWidget {
   @override
   State<LanguageSelectorBottomSheet> createState() =>
@@ -20,13 +22,25 @@ class _LanguageSelectorBottomSheetState
             onTap: () {
               settingProvider.changeLang('en');
             },
-            child:settingProvider.currentLang =='en' ?getSelectedItem("English"):getUnSelectedItem("English"),
+            child: settingProvider.currentLang == 'en'
+                ? getSelectedItem("English")
+                : getUnSelectedItem("English"),
           ),
           InkWell(
             onTap: () {
-              settingProvider.changeLang('ar');
+              Fluttertoast.showToast(
+                  msg: "Only English Available Now ",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.green,
+                  fontSize: 20.0);
+
             },
-            child:settingProvider.currentLang =='ar'? getSelectedItem(AppLocalizations.of(context)!.arabic):getUnSelectedItem(AppLocalizations.of(context)!.arabic),
+            child: settingProvider.currentLang == 'ar'
+                ? getSelectedItem(AppLocalizations.of(context)!.arabic)
+                : getUnSelectedItem(AppLocalizations.of(context)!.arabic),
           )
         ],
       ),
